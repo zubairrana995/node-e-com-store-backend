@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
+const config = require("config");
+const dbgr = require("debug")("development:mongoose");
 mongoose
-  .connect("mongodb://localhost:27017/store", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(`${config.get("MONGO_URI")}/store`)
   .then(() => {
-    console.log("Database connected");
+    dbgr("Database connected");
   })
   .catch((err) => {
-    console.log(err);
+    dbgr(err);
   });
 module.exports = mongoose.connection;
