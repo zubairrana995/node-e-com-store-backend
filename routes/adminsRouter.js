@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Admin = require("../models/admin-modal");
-console.log(process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === "development") {
   router.post("/create", async (req, res) => {
