@@ -1,27 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const Admin = require("../models/admin-modal");
+const {
+  registerAdmin,
+  loginAdmin,
+  logout,
+} = require("../controllers/authController");
+const { authAdminMiddleware } = require("../middlewares/authMiddleware");
 
-if (process.env.NODE_ENV === "development") {
-  router.post("/create", async (req, res) => {
-    let admin = await Admin.find();
-    if (admin.length > 0) {
-      return res
-        .status(400)
-        .send("You are not allowed to create another admin");
-    }
-
-    let { fullname, email, password } = req.body;
-    let newAdmin = await Admin.create({
-      fullname,
-      email,
-      password,
-    });
-    res.status(200).send(newAdmin);
-  });
-}
-
-router.get("/", (req, res) => {
-  res.send("Admins Route");
+router.post("/register-admin", registerAdmin);
+router.post("/login-admin", loginAdmin);
+router.post("/logout", logout);
+router.post("/admin-panel", authAdminMiddleware, (req, res) => {
+  res.send("Admin Panel");
 });
 module.exports = router;

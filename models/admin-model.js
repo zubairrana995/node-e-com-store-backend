@@ -1,9 +1,19 @@
 const mongoose = require("mongoose");
 
 const adminSchema = new mongoose.Schema({
-  fullname: String,
-  email: String,
-  password: String,
+  fullname: {
+    type: String,
+    trim: true,
+    minLength: 3,
+  },
+  email: {
+    type: String,
+    unique: true,
+  },
+  password: {
+    type: String,
+    minLength: 8,
+  },
   contact: Number,
   picture: String,
   products: {

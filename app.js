@@ -6,6 +6,7 @@ const db = require("./config/db-connection");
 const adminsRouter = require("./routes/adminsRouter");
 const usersRouter = require("./routes/usersRouter");
 const productsRouter = require("./routes/productsRouter");
+require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
