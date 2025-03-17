@@ -16,10 +16,13 @@ const userSchema = new mongoose.Schema({
   },
   contact: Number,
   picture: String,
-  cart: {
-    type: Array,
-    default: [],
-  },
+  cart: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      default: [],
+    },
+  ],
   orders: {
     type: Array,
     default: [],
